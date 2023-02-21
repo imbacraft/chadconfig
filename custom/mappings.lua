@@ -20,6 +20,10 @@ M.general = {
     ["<leader>w<Right>"] = { "<C-w>l", "Window right", opts},
     ["<leader>ww"] = { "<C-w>w", "Last window", opts},
 
+    --Theme
+    ["<leader>fc"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
+
+
     --Packer
     ["<leader>P"] = { "<cmd>PackerSync<cr>", "Packer Sync", opts},
 
@@ -37,7 +41,7 @@ M.general = {
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help Page" },
 		["<leader>fr"] = { "<cmd> Telescope oldfiles <CR>", "Find Oldfiles" },
 		["<leader>fk"] = { "<cmd> Telescope keymaps <CR>", "Show Keys" },
-    ["<leader>fc"] = {"<cmd>Telescope colorscheme<cr>", "Colorschemes", opts},
+    ["<leader>fC"] = {"<cmd>Telescope colorscheme<cr>", "Colorschemes", opts},
     ["<leader>fp"] = { "<cmd>Telescope projects<cr>", "Projects" },
     ["<leader>pp"] = { "<cmd>Telescope projects<cr>", "Projects" },
 
