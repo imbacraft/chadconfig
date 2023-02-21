@@ -103,6 +103,9 @@ M.treesitter = {
 }
 
 M.nvimtree = {
+	filters = {
+		dotfiles = true,
+	},
 	git = {
 		enable = true,
 	},
@@ -113,6 +116,9 @@ M.nvimtree = {
 				git = true,
 			},
 		},
+	},
+	view = {
+		hide_root_folder = false,
 	},
 }
 

@@ -11,6 +11,16 @@ local plugins = {
 		end,
 	},
 
+	["kylechui/nvim-surround"] = {
+		event = "InsertEnter",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+
 	["kdheepak/lazygit.nvim"] = {
 		cmd = "LazyGit",
 	},
@@ -29,6 +39,14 @@ local plugins = {
 
 	["dstein64/vim-startuptime"] = {
 		cmd = "StartupTime",
+	},
+
+	-- Code Runner
+	["is0n/jaq-nvim"] = {
+		cmd = "Jaq",
+		config = function()
+			require("custom.plugins.jaq")
+		end,
 	},
 
 	["jose-elias-alvarez/null-ls.nvim"] = {

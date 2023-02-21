@@ -1,5 +1,5 @@
 --Override options
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 0
 
 --Autocommands
 
