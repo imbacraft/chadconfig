@@ -4,6 +4,15 @@ local plugins = {
 
 	-- ["goolord/alpha-nvim"] = { disable = false } -- enables dashboard
 
+	["ray-x/lsp_signature.nvim"] = {
+		event = "InsertEnter",
+		config = function()
+			require("lsp_signature").setup({
+				floating_window = false,
+			})
+		end,
+	},
+
 	["nmac427/guess-indent.nvim"] = {
 		event = "InsertEnter",
 		config = function()
@@ -84,6 +93,13 @@ local plugins = {
 				mapping = {
 					["<Up>"] = cmp.mapping.select_prev_item(select_opts),
 					["<Down>"] = cmp.mapping.select_next_item(select_opts),
+				},
+				sources = {
+					{ name = "luasnip", keyword_length = 2, max_item_count = 2 },
+					{ name = "nvim_lsp", keyword_length = 3 }, --keyword_length : how many characters are necessary to trigger autocompletion
+					{ name = "buffer", keyword_length = 3, max_item_count = 2 },
+					{ name = "nvim_lua", keyword_length = 3, max_item_count = 2 },
+					{ name = "path" },
 				},
 			}
 		end,
