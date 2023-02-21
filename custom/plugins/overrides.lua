@@ -18,8 +18,8 @@ M.mason = {
 		"json-lsp",
 
 		-- Rust
-		"rust-analyzer",
-		"rustfmt",
+		-- "rust-analyzer",
+		-- "rustfmt",
 
 		-- File Formats
 		"json-lsp",

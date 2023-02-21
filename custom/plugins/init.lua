@@ -147,7 +147,7 @@ local plugins = {
 	-- },
 
 	-- ["EdenEast/nightfox.nvim"] = {},
-	["nyoom-engineering/oxocarbon.nvim"] = {},
+	-- ["nyoom-engineering/oxocarbon.nvim"] = {},
 
 	["lukas-reineke/indent-blankline.nvim"] = {
 		disable = true,
@@ -172,12 +172,9 @@ local plugins = {
 
 	["folke/trouble.nvim"] = {
 		cmd = "TroubleToggle",
-		requires = {
-			"kyazdani42/nvim-web-devicons",
-			config = function()
-				require("custom.plugins.trouble")
-			end,
-		},
+		config = function()
+			require("custom.plugins.trouble")
+		end,
 	},
 }
 

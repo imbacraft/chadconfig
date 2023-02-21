@@ -2,14 +2,11 @@
 
 local M = {}
 
-
-
 M.ui = {
-  theme = "onedark",
+	theme = "onedark",
 }
 
-
-M.plugins = require "custom.plugins"
-M.mappings = require "custom.mappings"
+M.plugins = require("custom.plugins")
+M.mappings = require("custom.mappings")
 
 return M
