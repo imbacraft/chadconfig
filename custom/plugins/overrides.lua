@@ -4,7 +4,6 @@ M.mason = {
 	ensure_installed = {
 		-- Lua
 		"lua-language-server",
-		"luacheck",
 		"stylua",
 
 		-- SQL
@@ -16,6 +15,7 @@ M.mason = {
 		"typescript-language-server",
 		"prettierd",
 		"eslint_d",
+		"json-lsp",
 
 		-- Rust
 		"rust-analyzer",
@@ -49,8 +49,8 @@ M.mason = {
 		"shellcheck",
 		"shellharden",
 
-    --Java
-    "jdtls",
+		--Java
+		"jdtls",
 
 		-- Others
 		"ansible-language-server",
@@ -67,9 +67,6 @@ M.treesitter = {
 	ensure_installed = {
 		"bash",
 		"c",
-		"cmake",
-		"cpp",
-		"cmake",
 		"cpp",
 		"css",
 		"dockerfile",
@@ -87,13 +84,10 @@ M.treesitter = {
 		"json5",
 		"jsonc",
 		"kotlin",
-		"latex",
 		"lua",
 		"make",
 		"markdown",
 		"markdown_inline",
-		"meson",
-		"nix",
 		"org",
 		"python",
 		"regex",
