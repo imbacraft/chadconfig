@@ -4,15 +4,26 @@ local plugins = {
 
   -- ["goolord/alpha-nvim"] = { disable = false } -- enables dashboard
 
-  -- code formatting, linting etc
-  -- ["jose-elias-alvarez/null-ls.nvim"] = {
-  --   after = "nvim-lspconfig",
-  --   config = function()
-  --     require "custom.plugins.null-ls"
-  --   end,
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.null-ls"
+    end,
+  },
+
+  ["nvim-treesitter/nvim-treesitter"] = {
+    override_options = overrides.treesitter,
+  },
+
+  ["williamboman/mason.nvim"] = {
+    override_options = overrides.mason,
+  },
+
+  -- ["kyazdani42/nvim-tree.lua"] = {
+  --   override_options = overrides.nvimtree,
   -- },
 
-    -- Override plugin definition options
+  -- Override plugin definition options
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lspconfig"
@@ -20,10 +31,16 @@ local plugins = {
     end,
   },
 
-    ["hrsh7th/nvim-cmp"] = {
-    config = function()
-      require "plugins.configs.cmp"
-      require "custom.plugins.cmp"
+  ["hrsh7th/nvim-cmp"] = {
+    override_options = function()
+      local cmp = require "cmp"
+      local select_opts = { behavior = cmp.SelectBehavior.Select }
+      return {
+        mapping = {
+          ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+          ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+        },
+      }
     end,
   },
 
@@ -84,30 +101,27 @@ local plugins = {
     end,
   },
 
+  ["EdenEast/nightfox.nvim"] = {},
 
-  ["EdenEast/nightfox.nvim" ] = {},
-
-    ["lukas-reineke/indent-blankline.nvim"] = {
-    disable = true
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    disable = true,
   },
 
   ["folke/which-key.nvim"] = {
-    disable = false
-
+    disable = false,
   },
 
   ["mfussenegger/nvim-jdtls"] = {
     ft = "java",
-
   },
 
   -- -- DAP (Required to run Java unit tests)--
   ["mfussenegger/nvim-dap"] = {
-    ft = "java"
+    ft = "java",
   },
 
   ["Pocco81/DAPInstall.nvim"] = {
-    ft = "java"
+    ft = "java",
   },
 
   ["folke/trouble.nvim"] = {
@@ -118,8 +132,6 @@ local plugins = {
       end,
     },
   },
-
-
 }
 
 return plugins
