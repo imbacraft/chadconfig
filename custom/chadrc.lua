@@ -3,7 +3,7 @@
 local M = {}
 
 M.ui = {
-	theme = "onedark",
+	theme = "vscode_dark",
 }
 
 M.plugins = require("custom.plugins")

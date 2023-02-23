@@ -14,9 +14,38 @@ local plugins = {
 	},
 
 	["nmac427/guess-indent.nvim"] = {
-		event = "InsertEnter",
+		event = "WinScrolled",
 		config = function()
 			require("guess-indent").setup({})
+		end,
+	},
+
+	["rcarriga/nvim-dap-ui"] = {
+		ft = "java",
+		config = function()
+			require("dapui").setup()
+		end,
+	},
+
+	["simrat39/symbols-outline.nvim"] = {
+		cmd = "SymbolsOutline",
+		config = function()
+			require("symbols-outline").setup()
+		end,
+	},
+
+	-- ["Darazaki/indent-o-matic"] = {
+	-- 	event = "WinScrolled",
+	-- 	confg = function()
+	-- 		require("indent-o-matic").setup({})
+	-- 	end,
+	-- },
+
+	--Smooth scrolling
+	["karb94/neoscroll.nvim"] = {
+		event = "WinScrolled",
+		config = function()
+			require("neoscroll").setup()
 		end,
 	},
 
@@ -67,6 +96,56 @@ local plugins = {
 
 	["nvim-treesitter/nvim-treesitter"] = {
 		override_options = overrides.treesitter,
+		event = "BufRead",
+		requires = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			module = "nvim-treesitter-textobjects",
+			after = "nvim-treesitter",
+			setup = function()
+				require("nvim-treesitter.configs").setup({
+					textobjects = {
+						select = {
+							enable = true,
+
+							-- Automatically jump forward to textobj, similar to targets.vim
+							lookahead = true,
+
+							keymaps = {
+								-- You can use the capture groups defined in textobjects.scm
+								["af"] = "@function.outer",
+								["if"] = "@function.inner",
+								["ac"] = "@class.outer",
+								-- You can optionally set descriptions to the mappings (used in the desc parameter of
+								-- nvim_buf_set_keymap) which plugins like which-key display
+								["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+							},
+							-- You can choose the select mode (default is charwise 'v')
+							--
+							-- Can also be a function which gets passed a table with the keys
+							-- * query_string: eg '@function.inner'
+							-- * method: eg 'v' or 'o'
+							-- and should return the mode ('v', 'V', or '<c-v>') or a table
+							-- mapping query_strings to modes.
+							selection_modes = {
+								["@parameter.outer"] = "v", -- charwise
+								["@function.outer"] = "V", -- linewise
+								["@class.outer"] = "<c-v>", -- blockwise
+							},
+							-- If you set this to `true` (default is `false`) then any textobject is
+							-- extended to include preceding or succeeding whitespace. Succeeding
+							-- whitespace has priority in order to act similarly to eg the built-in
+							-- `ap`.
+							--
+							-- Can also be a function which gets passed a table with the keys
+							-- * query_string: eg '@function.inner'
+							-- * selection_mode: eg 'v'
+							-- and should return true of false
+							include_surrounding_whitespace = false,
+						},
+					},
+				})
+			end,
+		},
 	},
 
 	["williamboman/mason.nvim"] = {
@@ -115,53 +194,55 @@ local plugins = {
 	},
 
 	-- ["nvim-treesitter/nvim-treesitter-textobjects"] = {
-	--   after = "nvim-treesitter",
-	--   setup = function()
-	--     require("nvim-treesitter.configs").setup {
-	--       textobjects = {
-	--         select = {
-	--           enable = true,
+	-- 	module = "nvim-treesitter-textobjects",
+	-- 	after = "nvim-treesitter",
+	-- 	setup = function()
+	-- 		require("nvim-treesitter-textobjects")
+	-- 		require("nvim-treesitter.configs").setup({
+	-- 			textobjects = {
+	-- 				select = {
+	-- 					enable = true,
 	--
-	--           -- Automatically jump forward to textobj, similar to targets.vim
-	--           lookahead = true,
+	-- 					-- Automatically jump forward to textobj, similar to targets.vim
+	-- 					lookahead = true,
 	--
-	--           keymaps = {
-	--             -- You can use the capture groups defined in textobjects.scm
-	--             ["af"] = "@function.outer",
-	--             ["if"] = "@function.inner",
-	--             ["ac"] = "@class.outer",
-	--             -- You can optionally set descriptions to the mappings (used in the desc parameter of
-	--             -- nvim_buf_set_keymap) which plugins like which-key display
-	--             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-	--           },
-	--           -- You can choose the select mode (default is charwise 'v')
-	--           --
-	--           -- Can also be a function which gets passed a table with the keys
-	--           -- * query_string: eg '@function.inner'
-	--           -- * method: eg 'v' or 'o'
-	--           -- and should return the mode ('v', 'V', or '<c-v>') or a table
-	--           -- mapping query_strings to modes.
-	--           selection_modes = {
-	--             ["@parameter.outer"] = "v", -- charwise
-	--             ["@function.outer"] = "V", -- linewise
-	--             ["@class.outer"] = "<c-v>", -- blockwise
-	--           },
-	--           -- If you set this to `true` (default is `false`) then any textobject is
-	--           -- extended to include preceding or succeeding whitespace. Succeeding
-	--           -- whitespace has priority in order to act similarly to eg the built-in
-	--           -- `ap`.
-	--           --
-	--           -- Can also be a function which gets passed a table with the keys
-	--           -- * query_string: eg '@function.inner'
-	--           -- * selection_mode: eg 'v'
-	--           -- and should return true of false
-	--           include_surrounding_whitespace = true,
-	--         },
-	--       },
-	--     }
-	--   end,
+	-- 					keymaps = {
+	-- 						-- You can use the capture groups defined in textobjects.scm
+	-- 						["af"] = "@function.outer",
+	-- 						["if"] = "@function.inner",
+	-- 						["ac"] = "@class.outer",
+	-- 						-- You can optionally set descriptions to the mappings (used in the desc parameter of
+	-- 						-- nvim_buf_set_keymap) which plugins like which-key display
+	-- 						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+	-- 					},
+	-- 					-- You can choose the select mode (default is charwise 'v')
+	-- 					--
+	-- 					-- Can also be a function which gets passed a table with the keys
+	-- 					-- * query_string: eg '@function.inner'
+	-- 					-- * method: eg 'v' or 'o'
+	-- 					-- and should return the mode ('v', 'V', or '<c-v>') or a table
+	-- 					-- mapping query_strings to modes.
+	-- 					selection_modes = {
+	-- 						["@parameter.outer"] = "v", -- charwise
+	-- 						["@function.outer"] = "V", -- linewise
+	-- 						["@class.outer"] = "<c-v>", -- blockwise
+	-- 					},
+	-- 					-- If you set this to `true` (default is `false`) then any textobject is
+	-- 					-- extended to include preceding or succeeding whitespace. Succeeding
+	-- 					-- whitespace has priority in order to act similarly to eg the built-in
+	-- 					-- `ap`.
+	-- 					--
+	-- 					-- Can also be a function which gets passed a table with the keys
+	-- 					-- * query_string: eg '@function.inner'
+	-- 					-- * selection_mode: eg 'v'
+	-- 					-- and should return true of false
+	-- 					include_surrounding_whitespace = false,
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
 	-- },
-
+	--
 	-- ["EdenEast/nightfox.nvim"] = {},
 	-- ["nyoom-engineering/oxocarbon.nvim"] = {},
 

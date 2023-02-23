@@ -6,6 +6,7 @@ M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["Q"] = { "<cmd>only<CR>", "close other windows", opts },
+		["Qa!"] = { "<cmd>qa!<cr>", "exit nvim", opts },
 
 		--Window navigation
 		["<leader>w<Left>"] = { "<C-w>h", "Window left", opts },
@@ -14,26 +15,31 @@ M.general = {
 		["<leader>w<Right>"] = { "<C-w>l", "Window right", opts },
 		["<leader>ww"] = { "<C-w>w", "Last window", opts },
 
-		--Theme
+		--Themes
 		["<leader>fc"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
 
 		--Nvim Tree
 		["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
 
 		--Packer
-		["<leader>P"] = { "<cmd>PackerSync<cr>", "Packer Sync", opts },
+		["<leader>ps"] = { "<cmd>PackerSync<cr>", "Packer Sync", opts },
 
 		--Buffer
 		["<leader>b"] = { "+Buffer" },
+		["<leader>bb"] = { "<cmd> Telescope buffers <CR>", "Find Buffers" },
 		["<leader>bk"] = { "<Cmd>bd!<Cr>", "Kill current buffer" },
 		["<leader>bK"] = { "<cmd>%bd! |edit # | bd#<cr>", "Kill all buffers except current" },
+		["<leader>bp"] = { "<Cmd>bprevious<cr>", "Previous buffer" },
+		["<leader>bn"] = { "<Cmd>bnext<cr>", "Next buffer" },
 
 		-- find
 		["<leader>f"] = { "+Find" },
-		["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find Files" },
-		["<leader><leader>"] = { "<cmd> Telescope find_files <CR>", "Find Files" },
-		["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find All" },
-		["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "Live Grep" },
+		["<leader>ff"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find Files" },
+		["<leader><leader>"] = {
+			"<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>",
+			"Find Files",
+		},
+		["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "Find String" },
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "Find Buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help Page" },
 		["<leader>fr"] = { "<cmd> Telescope oldfiles <CR>", "Find Oldfiles" },
@@ -46,15 +52,28 @@ M.general = {
 		["<leader>c"] = { "+Code" },
 		["<leader>cx"] = { "<cmd>TroubleToggle<cr>", "LSP Diagnostics" },
 		["<leader>cf"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format with LSP" },
+		["<leader>cs"] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
 
+		--Java
 		["<leader>j"] = { "+Java" },
 		["<leader>jt"] = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
 		["<leader>jT"] = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
 		["<leader>ju"] = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
 		["<leader>jr"] = { "<Cmd>Jaq<CR>", "Execute Java" },
 
+		--Debug
+		["<leader>d"] = { "+Debug" },
+		["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+		["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "Start Debug/Continue" },
+		["<leader>di"] = { "<cmd>lua require'dap'.step_into()<cr>", "Into" },
+		["<leader>do"] = { "<cmd>lua require'dap'.step_over()<cr>", "Over" },
+		["<leader>dO"] = { "<cmd>lua require'dap'.step_out()<cr>", "Out" },
+		["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<cr>", "Last" },
+		["<leader>du"] = { "<cmd>lua require'dapui'.toggle()<cr>", "UI" },
+		["<leader>dx"] = { "<cmd>lua require'dap'.terminate()<cr>", "Exit" },
+
 		--Grep
-		["<leader>s"] = { "+Search" },
+		["<leader>s"] = { "+Search String" },
 		["<leader>sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "In current Buffer" },
 		["<leader>sp"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "In Project" },
 		["<leader>sl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
@@ -273,7 +292,7 @@ M.disabled = {
 		["<leader>fy"] = "",
 		["<leader>fz"] = "",
 
-		["<leader>g"] = "",
+		-- ["<leader>g"] = "",
 		["<leader>ga"] = "",
 		["<leader>gb"] = "",
 		["<leader>gc"] = "",
