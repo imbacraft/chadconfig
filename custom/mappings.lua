@@ -96,6 +96,27 @@ M.general = {
 		["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 		["<leader>gd"] = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
 		["<leader>gl"] = { "<cmd>GitBlameToggle<cr>", "Blame" },
+
+		["<leader>ca"] = {
+			function()
+				vim.lsp.buf.code_action()
+			end,
+			"Code Action",
+		},
+
+		["<leader>cd"] = {
+			function()
+				vim.diagnostic.open_float()
+			end,
+			"Floating Diagnostic",
+		},
+
+		["<leader>cr"] = {
+			function()
+				require("nvchad_ui.renamer").open()
+			end,
+			"Rename",
+		},
 	},
 }
 
