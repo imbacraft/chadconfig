@@ -52,6 +52,9 @@ M.mason = {
 		--Java
 		"jdtls",
 
+		--XML
+		"lemminx",
+
 		-- Others
 		"ansible-language-server",
 		"css-lsp",
