@@ -103,6 +103,13 @@ M.treesitter = {
 }
 
 M.nvimtree = {
+	sync_root_with_cwd = true,
+	update_cwd = true,
+	update_focused_file = {
+		enable = true,
+		update_root = true,
+		ignore_list = {},
+	},
 	filters = {
 		dotfiles = true,
 	},
